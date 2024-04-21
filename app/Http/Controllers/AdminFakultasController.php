@@ -10,7 +10,7 @@ class AdminFakultasController extends Controller
 {
     public function index()
     {
-        $data = User::whereHas('roles', function ($query) {
+        $data = User::with('fakultas')->whereHas('roles', function ($query) {
             $query->where('name', 'admn_fakultas');
         })->paginate(10);
 

@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class EditDosenRequest extends FormRequest
+class MahasiswaStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +23,12 @@ class EditDosenRequest extends FormRequest
     {
         return [
             'role' => 'required',
-            'name' => 'required', 
-            'fakultas' => 'required',
-            'id_prodi' => 'nullable',
-            'username' => 'unique:users,username,'.$this->id.',id',
-            'email' => 'unique:users,email,'.$this->id.',id'
+            'id_prodi' => 'required',
+            'id_angkatan' => 'required',
+            'name' => 'required',
+            'username' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
         ];
     }
 }

@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('profiles', function (Blueprint $table) {
+        Schema::create('jumlah_dospems', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_prodi')->nullable();
-            $table->bigInteger('id_angkatan')->nullable();
+            $table->bigInteger('id_fakultas');
+            $table->integer('jumlah')->default(2);
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profiles');
+        Schema::dropIfExists('jumlah_dospems');
     }
 };

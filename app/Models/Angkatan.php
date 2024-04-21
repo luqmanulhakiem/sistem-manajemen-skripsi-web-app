@@ -13,6 +13,6 @@ class Angkatan extends Model
 
     public function profile(): BelongsTo
     {
-        return $this->belongsTo(Angkatan::class, 'id_angkatan', 'id');
+        return $this->belongsTo(profile::class, 'id_angkatan', 'id');
     }
 }

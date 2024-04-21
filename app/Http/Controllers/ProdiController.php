@@ -14,7 +14,13 @@ class ProdiController extends Controller
      */
     public function index()
     {
-        $data = Prodi::with('fakultas')->paginate(10);
+        $auth = User::with('profile')->where('id', auth()->user()->id)->first();
+
+        $data = Prodi::with('fakultas')
+        ->whereHas('fakultas', function ($q) use ($auth) {
+            $q->where('id', $auth->id_fakultas);
+        })
+        ->paginate(10);
 
         return view('pages.prodi.index', compact('data'));
     }

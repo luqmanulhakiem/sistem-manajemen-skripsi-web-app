@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('id_profile')->constrained('profiles')->cascadeOnUpdate()->cascadeOnDelete();
             $table->bigInteger('id_fakultas')->constrained('fakultas')->cascadeOnUpdate()->cascadeOnDelete()->nullable();
-            $table->bigInteger('id_prodi')->constrained('prodis')->cascadeOnUpdate()->cascadeOnDelete()->nullable();
+            // $table->bigInteger('id_prodi')->constrained('prodis')->cascadeOnUpdate()->cascadeOnDelete()->nullable();
             $table->string('avatar')->nullable();
             $table->string('name');
             $table->string('username')->unique();

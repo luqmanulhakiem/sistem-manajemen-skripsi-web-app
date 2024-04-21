@@ -42,8 +42,16 @@
         </li>
     @endrole
     
-    <!-- Divider -->
-    {{-- <hr class="sidebar-divider d-none d-md-block"> --}}
+    @hasanyrole(['admn_univ', 'admn_fakultas'])
+        <!-- Divider -->
+        {{-- <hr class="sidebar-divider d-none d-md-block"> --}}
+
+        <li class="nav-item {{Request::is(['data/angkatan', 'data/angkatan/create', 'data/angkatan/edit/*']) ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('angkatan')}}">
+                <i class="fas fa-fw fa-folder-open"></i>
+                <span>Data Angkatan</span></a>
+        </li>
+    @endhasanyrole
 
     @role('admn_fakultas')
 
@@ -53,6 +61,11 @@
         </div>
 
         {{-- Nav Item --}}
+        <li class="nav-item {{Request::is(['data/mahasiswa', 'data/mahasiswa/create', 'data/mahasiswa/edit/*']) ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('mahasiswa')}}">
+                <i class="fas fa-fw fa-users"></i>
+                <span>Data Mahasiswa</span></a>
+        </li>
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
@@ -61,32 +74,24 @@
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="cards.html">Semua Dosen</a>
-                    <a class="collapse-item" href="cards.html">Kaprodi</a>
-                    <a class="collapse-item" href="buttons.html">Dosen Penguji</a>
-                    <a class="collapse-item" href="cards.html">Dosen Pembimbing</a>
+                    <a class="collapse-item" href="{{route('dosen.index')}}">Semua Dosen</a>
+                    <a class="collapse-item" href="{{route('kaprodi')}}">Kaprodi</a>
+                    <a class="collapse-item" href="{{route('dospem')}}">Dosen Pembimbing</a>
                 </div>
             </div>
         </li>
-
         
-        <li class="nav-item {{Request::is(['data/angkatan', 'data/angkatan/create', 'data/angkatan/edit/*']) ? 'active' : '' }}">
-            <a class="nav-link" href="{{route('angkatan')}}">
-                <i class="fas fa-fw fa-university"></i>
-                <span>Data Angkatan</span></a>
-        </li>
         <li class="nav-item {{Request::is(['data/prodi', 'data/prodi/create', 'data/prodi/edit/*']) ? 'active' : '' }}">
             <a class="nav-link" href="{{route('prodi')}}">
-                <i class="fas fa-fw fa-university"></i>
+                <i class="fas fa-fw fa-graduation-cap"></i>
                 <span>Data Prodi</span></a>
         </li>
-       
-
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('mahasiswa')}}">
-                <i class="fas fa-fw fa-users"></i>
-                <span>Data Mahasiswa</span></a>
+        <li class="nav-item {{Request::is(['data/jumlah-dospem']) ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('jumlah-dospem')}}">
+                <i class="fas fa-fw fa-graduation-cap"></i>
+                <span>Data Jumlah Dospem</span></a>
         </li>
+       
     @endrole
 
     <!-- Divider -->
@@ -99,13 +104,13 @@
         </div>
 
         {{-- Nav Item --}}
-        <li class="nav-item">
-            <a class="nav-link" href="charts.html">
+        <li class="nav-item {{Request::is(['pengajuan-judul', 'pengajuan-judul/*']) ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('pengajuan-judul')}}">
                 <i class="fas fa-fw fa-book"></i>
                 <span>Pengajuan Judul</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="charts.html">
+            <a class="nav-link" href="{{route('pengajuan-dospem')}}">
                 <i class="fas fa-fw fa-user"></i>
                 <span>Pengajuan Dospem</span></a>
         </li>

@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class EditDosenRequest extends FormRequest
+class MahasiswaUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +22,9 @@ class EditDosenRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'role' => 'required',
-            'name' => 'required', 
-            'fakultas' => 'required',
-            'id_prodi' => 'nullable',
+            'id_prodi' => 'required',
+            'id_angkatan' => 'required',
+            'name' => 'required',
             'username' => 'unique:users,username,'.$this->id.',id',
             'email' => 'unique:users,email,'.$this->id.',id'
         ];

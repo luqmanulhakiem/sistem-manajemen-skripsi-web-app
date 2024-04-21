@@ -3,15 +3,13 @@
 @section('content')
 <div class="container-fluid">
 
-    <h1 class="h3 mb-2 text-gray-800">Data Angkatan</h1>
+    <h1 class="h3 mb-2 text-gray-800">Data Kaprodi</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Data Angkatan</h6>
-            @role('admn_univ')
-                <a href="{{route('angkatan.create')}}" class="btn btn-primary">Tambah</a>
-            @endrole
+            <h6 class="m-0 font-weight-bold text-primary">Data Kaprodi</h6>
+            <a href="{{route('kaprodi.create')}}" class="btn btn-primary">Tambah</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -19,11 +17,11 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Tahun Angkatan</th>
-                            <th>Status</th>
-                            @role('admn_univ')
-                                <th class="text-center">Aksi</th>
-                            @endrole
+                            <th>NIDN</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Prodi</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,21 +32,21 @@
                             @foreach ($data as $item)
                                 <tr>
                                     <td>{{$number++}}</td>
+                                    <td>{{$item->username}}</td>
                                     <td>{{$item->name}}</td>
-                                    <td>{{$item->status}}</td>
-                                    @role('admn_univ')
-                                        <td class="text-center">
-                                            <div class="btn-group">
-                                                <a href="{{route('angkatan.edit', ['id' => $item->id])}}" class="btn btn-sm btn-warning"><i class="fa fa-pen"></i> Edit</a>
-                                                <a href="{{route('angkatan.destroy', ['id' => $item->id])}}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</a>
-                                            </div>
-                                        </td>
-                                    @endrole
+                                    <td>{{$item->email}}</td>
+                                    <td>{{$item->profile->prodi->name}}</td>
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <a href="{{route('kaprodi.edit', ['id' => $item->id])}}" class="btn btn-sm btn-warning"><i class="fa fa-pen"></i> Edit</a>
+                                            <a href="{{route('dosen.delete', ['id' => $item->id])}}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="5" class="text-center">Belum Ada Data</td>
+                                <td colspan="6" class="text-center">Belum Ada Data</td>
                             </tr>
                         @endif
                     </tbody>

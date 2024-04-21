@@ -1,11 +1,17 @@
 <?php
 
 use App\Http\Controllers\AdminFakultasController;
+use App\Http\Controllers\AllDosenController;
 use App\Http\Controllers\AngkatanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\DosenPembimbingController;
 use App\Http\Controllers\FakultasController;
+use App\Http\Controllers\JumlahDospemController;
+use App\Http\Controllers\KaprodiController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\PengajuanDospemController;
+use App\Http\Controllers\PengajuanJudulController;
 use App\Http\Controllers\ProdiController;
 use Illuminate\Support\Facades\Route;
 
@@ -59,7 +65,34 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('mahasiswa/update/{id}', 'update')->name('mahasiswa.update');
             Route::get('mahasiswa/destroy/{id}', 'destroy')->name('mahasiswa.destroy');
         });
+        Route::get('dosen', [AllDosenController::class, 'index'])->name('dosen.index');
+        Route::controller(KaprodiController::class)->group(function (){
+            Route::get('kaprodi', 'index')->name('kaprodi');
+            Route::get('kaprodi/create', 'create')->name('kaprodi.create');
+            Route::get('kaprodi/edit/{id}', 'edit')->name('kaprodi.edit');
+        });
+        Route::controller(JumlahDospemController::class)->group(function (){
+            Route::get('jumlah-dospem', 'index')->name('jumlah-dospem');
+            Route::post('jumlah-dospem/update', 'update')->name('jumlah-dospem.update');
+        });
+        Route::controller(DosenPembimbingController::class)->group(function (){
+            Route::get('dospem', 'index')->name('dospem');
+            Route::get('dospem/create', 'create')->name('dospem.create');
+            Route::get('dospem/edit/{id}', 'edit')->name('dospem.edit');
+        });
     });
+    // Mahasiswa
+    Route::controller(PengajuanJudulController::class)->group(function (){
+        Route::get('pengajuan-judul', 'index')->name('pengajuan-judul');
+        Route::get('pengajuan-judul/create', 'create')->name('pengajuan-judul.create');
+        Route::post('pengajuan-judul/store', 'store')->name('pengajuan-judul.store');
+    });
+    Route::controller(PengajuanDospemController::class)->group(function (){
+        Route::get('pengajuan-dospem', 'index')->name('pengajuan-dospem');
+        // Route::get('pengajuan-judul/create', 'create')->name('pengajuan-judul.create');
+        // Route::post('pengajuan-judul/store', 'store')->name('pengajuan-judul.store');
+    });
+    // 
     Route::controller(DosenController::class)->group(function () {
         Route::post('dosen-post', 'createDosen')->name('dosen.create'); 
         Route::post('dosen-update/{id}', 'update')->name('dosen.update'); 

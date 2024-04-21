@@ -14,7 +14,14 @@ class DosenController extends Controller
     public function createDosen(AddDosenRequest $request){
         $data = $request->validated();
 
-        $profile = profile::create();
+        if ($data['role'] == 'dosen_pembimbing' || $data['role'] == 'dosen_kaprodi') {
+            $profile = profile::create([
+                'id_prodi' => $data['id_prodi'],
+            ]);
+        }else{
+            $profile = profile::create();
+        }
+
 
         $user = User::create([
             'id_profile' => $profile->id,
@@ -29,6 +36,12 @@ class DosenController extends Controller
 
         if ($data['role'] == 'admn_fakultas') {
             return redirect()->route('admin-fakultas');
+        } elseif($data['role'] == 'dosen_pembimbing')
+        {
+            return redirect()->route('dospem');
+        } elseif($data['role'] == 'dosen_kaprodi')
+        {
+            return redirect()->route('kaprodi');
         }
     }
 
@@ -37,11 +50,24 @@ class DosenController extends Controller
         $data = $request->validated();
 
         $find = User::where('id', $id)->first();
-
+        $profile = profile::where('id', $find->id_profile)->first();
+        
         $find->update($data);
+        if ($data['role'] == 'dosen_pembimbing') {
+            $dt = [
+                'id_prodi' => $data['id_prodi'],
+            ];
+            $profile->update($dt);
+        }
 
         if ($data['role'] == 'admn_fakultas') {
             return redirect()->route('admin-fakultas');
+        }elseif($data['role'] == 'dosen_pembimbing')
+        {
+            return redirect()->route('dospem');
+        }elseif($data['role'] == 'dosen_kaprodi')
+        {
+            return redirect()->route('kaprodi');
         }
     }
 
@@ -57,6 +83,12 @@ class DosenController extends Controller
 
                 if ($array[0] == 'admn_fakultas') {
                     return redirect()->route('admin-fakultas');
+                }elseif($array[0] == 'dosen_pembimbing')
+                {
+                    return redirect()->route('dospem');
+                }elseif($array[0] == 'dosen_kaprodi')
+                {
+                    return redirect()->route('kaprodi');
                 }
 
             }

@@ -25,15 +25,43 @@ class AdminUnivSeeder extends Seeder
         ]);
         $user->assignRole('admn_univ');
 
-        // $profile2 = profile::create();
-        // $user2 = User::create([
-        //     'id_profile' => $profile2->id,
-        //     'name' => 'Admin Universitas 2',
-        //     'username' => '2024200420242',
-        //     'email' => 'adm_universitas2@gmail.com',
-        //     'password' => Hash::make('password'),
-        // ]);
-        // $user2->assignRole('admn_univ');
+        $profile2 = profile::create();
+        $user2 = User::create([
+            'id_profile' => $profile2->id,
+            'id_fakultas' => 1,
+            'name' => 'Admin Fakultas Teknik',
+            'username' => '0139123091',
+            'email' => 'tanti@gmail.com',
+            'password' => Hash::make('password'),
+        ]);
+        $user2->assignRole('admn_fakultas');
         // $user2->syncPermissions('create fakultas');
+        
+        $profile3 = profile::create([
+            'id_prodi' => 1,
+        ]);
+        $user3 = User::create([
+            'id_profile' => $profile3->id,
+            'id_fakultas' => 1,
+            'name' => 'Rofi',
+            'username' => '10240193109',
+            'email' => 'rofi@gmail.com',
+            'password' => Hash::make('password'),
+        ]);
+        $user3->assignRole('dosen_pembimbing');
+        
+        $profile4 = profile::create([
+            'id_prodi' => 1,
+            'id_angkatan' => 1,
+        ]);
+        $user4 = User::create([
+            'id_profile' => $profile4->id,
+            'id_fakultas' => 1,
+            'name' => 'Fiful',
+            'username' => '202020203103021',
+            'email' => 'fiful@gmail.com',
+            'password' => Hash::make('mhs12345'),
+        ]);
+        $user4->assignRole('mahasiswa');
     }
 }

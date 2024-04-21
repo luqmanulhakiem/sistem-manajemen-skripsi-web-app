@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FakultasStoreRequest;
 use App\Models\Fakultas;
+use App\Models\JumlahDospem;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
 
@@ -35,8 +36,12 @@ class FakultasController extends Controller
         $data = $request->validated();
         
         if ($data) {
-            Fakultas::create([
+            $fakultas = Fakultas::create([
                 'name' => $data['name']
+            ]);
+
+            JumlahDospem::create([
+                'id_fakultas' => $fakultas->id,
             ]);
     
             return redirect()->route('fakultas');

@@ -10,6 +10,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class profile extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'id_prodi',
+        'id_angkatan',
+    ];
 
     public function user(): BelongsTo
     {
@@ -18,5 +22,9 @@ class profile extends Model
     public function angkatan(): HasOne
     {
         return $this->hasOne(Angkatan::class, 'id', 'id_angkatan', 'id');
+    }
+    public function prodi(): HasOne
+    {
+        return $this->hasOne(Prodi::class, 'id', 'id_prodi', 'id');
     }
 }

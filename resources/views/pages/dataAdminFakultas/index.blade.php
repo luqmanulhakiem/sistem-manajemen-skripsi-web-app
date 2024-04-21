@@ -20,6 +20,7 @@
                             <th>NIDN</th>
                             <th>Nama</th>
                             <th>Email</th>
+                            <th>Fakultas</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -34,6 +35,7 @@
                                     <td>{{$item->username}}</td>
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->email}}</td>
+                                    <td>{{$item->fakultas->name}}</td>
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <a href="{{route('admin-fakultas.edit', ['id' => $item->id])}}" class="btn btn-sm btn-warning"><i class="fa fa-pen"></i> Edit</a>
