@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('pengajuan_dospems', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('id_mahasiswa')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->bigInteger('id_dospem1')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete()->nullable();
             $table->bigInteger('id_dospem2')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete()->nullable();
-            $table->enum('status_dosen1', ['diterima', 'ditolak', 'diajukan'])->nullable();
+            $table->enum('status_dosen1', ['diterima', 'ditolak', 'diajukan'])->default('diajukan');
             $table->enum('status_dosen2', ['diterima', 'ditolak', 'diajukan'])->nullable();
             $table->timestamps();
         });

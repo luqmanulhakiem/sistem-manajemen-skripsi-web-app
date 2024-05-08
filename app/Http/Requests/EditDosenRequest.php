@@ -26,6 +26,7 @@ class EditDosenRequest extends FormRequest
             'role' => 'required',
             'name' => 'required', 
             'fakultas' => 'required',
+            'phone' => 'nullable',
             'id_prodi' => 'nullable',
             'username' => 'unique:users,username,'.$this->id.',id',
             'email' => 'unique:users,email,'.$this->id.',id'

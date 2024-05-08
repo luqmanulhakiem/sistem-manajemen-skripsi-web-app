@@ -6,6 +6,8 @@ use App\Http\Controllers\AngkatanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\DosenPembimbingController;
+use App\Http\Controllers\DosenPembimbingScreenController;
+use App\Http\Controllers\DospemMahasiswaController;
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\JumlahDospemController;
 use App\Http\Controllers\KaprodiController;
@@ -65,6 +67,13 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('mahasiswa/update/{id}', 'update')->name('mahasiswa.update');
             Route::get('mahasiswa/destroy/{id}', 'destroy')->name('mahasiswa.destroy');
         });
+        Route::controller(DospemMahasiswaController::class)->group(function (){
+            Route::get('dospem-mahasiswa', 'index')->name('dospem-mahasiswa');
+            // Route::get('dospem-mahasiswa/create', 'create')->name('dospem-mahasiswa.create');
+            // Route::post('dospem-mahasiswa/store', 'store')->name('dospem-mahasiswa.store');
+            Route::get('dospem-mahasiswa/{id}', 'edit')->name('dospem-mahasiswa.edit');
+            Route::post('dospem-mahasiswa/{id}', 'update')->name('dospem-mahasiswa.update');
+        });
         Route::get('dosen', [AllDosenController::class, 'index'])->name('dosen.index');
         Route::controller(KaprodiController::class)->group(function (){
             Route::get('kaprodi', 'index')->name('kaprodi');
@@ -86,17 +95,36 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('pengajuan-judul', 'index')->name('pengajuan-judul');
         Route::get('pengajuan-judul/create', 'create')->name('pengajuan-judul.create');
         Route::post('pengajuan-judul/store', 'store')->name('pengajuan-judul.store');
+        Route::get('pengajuan-judul/edit', 'edit')->name('pengajuan-judul.edit');
+        Route::post('pengajuan-judul/update', 'update')->name('pengajuan-judul.update');
+
+
     });
     Route::controller(PengajuanDospemController::class)->group(function (){
         Route::get('pengajuan-dospem', 'index')->name('pengajuan-dospem');
-        // Route::get('pengajuan-judul/create', 'create')->name('pengajuan-judul.create');
-        // Route::post('pengajuan-judul/store', 'store')->name('pengajuan-judul.store');
+        Route::post('pengajuan-dospem', 'store')->name('pengajuan-dospem.store');
+        Route::post('pengajuan-dospem-update', 'update')->name('pengajuan-dospem.update');
+        
+
     });
     // 
     Route::controller(DosenController::class)->group(function () {
         Route::post('dosen-post', 'createDosen')->name('dosen.create'); 
         Route::post('dosen-update/{id}', 'update')->name('dosen.update'); 
         Route::get('dosen-delete/{id}', 'deleteDosen')->name('dosen.delete'); 
+    });
+    // DOSEN PEMBIMBING
+    Route::controller(DosenPembimbingScreenController::class)->group(function () {
+        Route::get('dosen/pengajuan-bimbingan', 'pbIndex')->name('pengajuan-bimbingan.dosen.index');
+        Route::get('dosen/pengajuan-bimbingan/{id}/{status}', 'pbStore')->name('pengajuan-bimbingan.dosen.store');
+        // Bimbingan Diterima
+        Route::get('dosen/daftar-bimbingan', 'bdIndex')->name('daftar-bimbingan.dosen.index');
+        Route::get('dosen/daftar-bimbingan/{id}/{status}', 'bdStore')->name('daftar-bimbingan.dosen.store');
+        Route::get('dosen/revisi-judul-mahasiswa/{id}', 'bdEdit')->name('daftar-bimbingan.dosen.edit');
+        Route::post('dosen/revisi-judul-mahasiswa/{id}', 'bdUpdate')->name('daftar-bimbingan.dosen.update');
+
+
+
     });
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });

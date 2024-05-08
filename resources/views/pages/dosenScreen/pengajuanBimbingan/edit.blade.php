@@ -2,18 +2,18 @@
 
 @section('content')
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800">Ajukan Judul</h1>
+        <h1 class="h3 mb-2 text-gray-800">Edit Data Fakultas</h1>
 
         <div class="card align-items-center">
             <div class="card-body col-md-6">
-                <form action="{{route('pengajuan-judul.store')}}" method="POST" class="form">
+                <form action="{{route('fakultas.update', ['id' => $data->id])}}" method="POST" class="form">
                     @csrf
                     <div class="form-group">
-                        <label for="">Judul Penelitian</label>
-                        <input type="text" name="judul" class="form-control" required>
+                        <label for="">Nama Fakultas</label>
+                        <input type="text" name="name" class="form-control" value="{{$data->name}}" required>
                     </div>
                     <div class="form-group align-right">
-                        <button class="btn btn-primary">Ajukan</button>
+                        <button class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>

@@ -34,7 +34,7 @@
                                     <td>Status :</td>
                                     <td><span class="badge bg-warning">{{$data->status}}</span> 
                                         @if ($data->status == 'revisi')
-                                        <a href="" class="btn btn-sm btn-warning">revisi</a>
+                                        <a href="{{route('pengajuan-judul.edit')}}" class="btn btn-sm btn-warning">revisi</a>
                                         @endif
                                     </td>
                                 </tr>

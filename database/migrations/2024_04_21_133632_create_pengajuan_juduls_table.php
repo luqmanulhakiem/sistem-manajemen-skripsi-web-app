@@ -14,13 +14,9 @@ return new class extends Migration
         Schema::create('pengajuan_juduls', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('id_mahasiswa')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->bigInteger('id_dospem1')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete()->nullable();
-            $table->bigInteger('id_dospem2')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete()->nullable();
             $table->string('judul');
             $table->string('komentar')->nullable();
-            $table->enum('status', ['diajukan', 'revisi', 'ditolak', 'diajukanUlang'])->default('diajukan');
-            $table->enum('status_dosen1', ['diterima', 'ditolak', 'diajukan'])->nullable();
-            $table->enum('status_dosen2', ['diterima', 'ditolak', 'diajukan'])->nullable();
+            $table->enum('status', ['diajukan', 'revisi', 'ditolak', 'diajukanUlang', 'diterima'])->default('diajukan');
             $table->timestamps();
         });
     }

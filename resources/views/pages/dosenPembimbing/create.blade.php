@@ -8,6 +8,14 @@
             <div class="card-body col-md-6">
                 <form action="{{route('dosen.create')}}" method="POST" class="form">
                     @csrf
+                    {{-- handle error --}}
+          @if ($errors->any())
+          <div class="pt-4 pb-2">
+            @foreach ($errors->all() as $error)
+              <p class="text-center small">{{ $error }}</p>
+            @endforeach
+          </div>
+        @endif
                     <input type="hidden" name="role" value="dosen_pembimbing" class="form-control" required>
                     <input type="hidden" name="fakultas" value="{{$auth->id_fakultas}}" class="form-control" required>
                     <div class="form-group">
@@ -21,6 +29,10 @@
                     <div class="form-group">
                         <label for="">NIDN</label>
                         <input type="text" name="username" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Telp</label>
+                        <input type="text" name="phone" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="">Prodi</label>

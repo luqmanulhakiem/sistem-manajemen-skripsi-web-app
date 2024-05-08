@@ -30,6 +30,10 @@
                         <input type="text" name="username" class="form-control" value="{{$data->username}}" required>
                     </div>
                     <div class="form-group">
+                        <label for="">Telp</label>
+                        <input type="text" name="phone" class="form-control" value="{{$data->phone}}" required>
+                    </div>
+                    <div class="form-group">
                         <label for="">Prodi</label>
                         <select class="form-control" name="id_prodi" id="">
                             @foreach ($prodi as $item)

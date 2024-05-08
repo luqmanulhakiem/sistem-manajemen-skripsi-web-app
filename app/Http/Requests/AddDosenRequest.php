@@ -26,6 +26,7 @@ class AddDosenRequest extends FormRequest
             'name' => 'required',
             'fakultas' => 'required',
             'id_prodi' => 'nullable',
+            'phone' => 'nullable',
             'username' => 'required|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',

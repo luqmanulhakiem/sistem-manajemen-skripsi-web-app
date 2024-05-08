@@ -46,6 +46,7 @@ class AdminUnivSeeder extends Seeder
             'name' => 'Rofi',
             'username' => '10240193109',
             'email' => 'rofi@gmail.com',
+            'phone' => '08332131',
             'password' => Hash::make('password'),
         ]);
         $user3->assignRole('dosen_pembimbing');

@@ -38,9 +38,15 @@ class DosenController extends Controller
             return redirect()->route('admin-fakultas');
         } elseif($data['role'] == 'dosen_pembimbing')
         {
+            $find = User::where('id', $user->id)->first();
+            $find->update(['phone' => $data['phone']]);
+            
             return redirect()->route('dospem');
         } elseif($data['role'] == 'dosen_kaprodi')
         {
+            $find = User::where('id', $user->id)->first();
+            $find->update(['phone' => $data['phone']]);
+
             return redirect()->route('kaprodi');
         }
     }
@@ -51,9 +57,26 @@ class DosenController extends Controller
 
         $find = User::where('id', $id)->first();
         $profile = profile::where('id', $find->id_profile)->first();
-        
-        $find->update($data);
-        if ($data['role'] == 'dosen_pembimbing') {
+        // dd($profile->id_prodi, $data['id_prodi']);
+        if ($data['role'] == 'admn_fakultas') {
+            $dt2 = [
+                'name' => $data['name'], 
+                'id_fakultas' => $data['fakultas'],
+                'username' => $data['username'],
+                'email' => $data['email']
+            ];
+            // dd($dt2);
+        }else{
+            $dt2 = [
+                'name' => $data['name'], 
+                'id_fakultas' => $data['fakultas'],
+                'phone' => $data['phone'],
+                'username' => $data['username'],
+                'email' => $data['email']
+            ];
+        }
+        $find->update($dt2);
+        if ($data['role'] == 'dosen_pembimbing' || $data['role'] == 'dosen_kaprodi') {
             $dt = [
                 'id_prodi' => $data['id_prodi'],
             ];

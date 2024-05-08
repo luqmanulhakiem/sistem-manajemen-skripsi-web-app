@@ -66,6 +66,11 @@
                 <i class="fas fa-fw fa-users"></i>
                 <span>Data Mahasiswa</span></a>
         </li>
+        <li class="nav-item {{Request::is(['data/dospem-mahasiswa', 'data/dospem-mahasiswa/*']) ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('dospem-mahasiswa')}}">
+                <i class="fas fa-fw fa-users"></i>
+                <span>Dospem Mahasiswa</span></a>
+        </li>
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
@@ -114,12 +119,26 @@
                 <i class="fas fa-fw fa-user"></i>
                 <span>Pengajuan Dospem</span></a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-                <i class="fas fa-fw fa-user"></i>
-                <span>Bimbingan</span></a>
-        </li>
     @endrole
+
+    @hasanyrole(['dosen_pembimbing','dosen_kaprodi'])
+        <!-- Heading -->
+        {{-- <div class="sidebar-heading">
+            DOSEN
+        </div> --}}
+
+        {{-- Nav Item --}}
+        <li class="nav-item {{Request::is(['pengajuan-judul', 'pengajuan-judul/*']) ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('pengajuan-bimbingan.dosen.index')}}">
+                <i class="fas fa-fw fa-book"></i>
+                <span>Pengajuan Bimbingan</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('daftar-bimbingan.dosen.index')}}">
+                <i class="fas fa-fw fa-users"></i>
+                <span>Daftar Bimbingan</span></a>
+        </li>
+    @endhasanyrole
    
 
     <!-- Sidebar Toggler (Sidebar) -->
