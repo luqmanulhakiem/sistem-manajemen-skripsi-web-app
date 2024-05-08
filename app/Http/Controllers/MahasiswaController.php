@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ImportMahasiswaRequest;
 use App\Http\Requests\MahasiswaStoreRequest;
 use App\Http\Requests\MahasiswaUpdateRequest;
+use App\Imports\MahasiswaImport;
 use App\Models\Angkatan;
 use App\Models\Fakultas;
 use App\Models\Prodi;
@@ -11,6 +13,7 @@ use App\Models\profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MahasiswaController extends Controller
 {
@@ -135,5 +138,29 @@ class MahasiswaController extends Controller
 
         return redirect()->route('mahasiswa');
 
+    }
+    public function import(){
+        return view('pages.mahasiswa.import');
+    }
+
+    public function importMahasiswa(ImportMahasiswaRequest $request) {
+        $data = $request->validated();
+        // import data
+        Excel::import(new MahasiswaImport(), $request->file('file'));
+        //redirect
+        return redirect()->route('mahasiswa');
+    }
+    public function export(){
+        $filename = 'mahasiswa.xlsx';
+        $filePath = public_path('excel/' . $filename);
+
+        // Check if the file exists
+        if (file_exists($filePath)) {
+            // Generate the appropriate response to download the file
+            return response()->download($filePath, $filename);
+        } else {
+            // Return a 404 Not Found response if the file doesn't exist
+            return abort(404);
+        }
     }
 }

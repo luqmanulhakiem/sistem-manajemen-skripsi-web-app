@@ -9,8 +9,13 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Data Mahasiswa</h6>
-            <a href="{{route('mahasiswa.create')}}" class="btn btn-primary">Tambah</a>
+            <div class="btn-group">
+                <a href="{{route('mahasiswa.create')}}" class="btn btn-primary">Tambah</a>
+                <a href="{{route('mahasiswa.import')}}" class="btn btn-secondary">Import Mahasiswa</a>
+            </div>
+            
         </div>
+        <div class="row"></div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

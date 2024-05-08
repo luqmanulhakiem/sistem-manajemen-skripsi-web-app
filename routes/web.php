@@ -61,6 +61,9 @@ Route::group(['middleware' => ['auth']], function () {
         });
         Route::controller(MahasiswaController::class)->group(function (){
             Route::get('mahasiswa', 'index')->name('mahasiswa');
+            Route::get('mahasiswa-export', 'export')->name('mahasiswa.export');
+            Route::get('mahasiswa-import', 'import')->name('mahasiswa.import');
+            Route::post('mahasiswa-import-store', 'importMahasiswa')->name('mahasiswa.import-store');
             Route::get('mahasiswa/create', 'create')->name('mahasiswa.create');
             Route::post('mahasiswa/store', 'store')->name('mahasiswa.store');
             Route::get('mahasiswa/edit/{id}', 'edit')->name('mahasiswa.edit');
