@@ -5,6 +5,7 @@ use App\Http\Controllers\AllDosenController;
 use App\Http\Controllers\AngkatanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BidangController;
+use App\Http\Controllers\BidangDosenController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\DosenPembimbingController;
 use App\Http\Controllers\DosenPembimbingScreenController;
@@ -59,6 +60,14 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('bidang/edit/{id}', 'edit')->name('bidang.edit');
             Route::post('bidang/update/{id}', 'update')->name('bidang.update');
             Route::get('bidang/destroy/{id}', 'destroy')->name('bidang.destroy');
+        });
+        Route::controller(BidangDosenController::class)->group(function (){
+            Route::get('bidang-dosen', 'index')->name('bidang-dosen');
+            Route::get('bidang-dosen/create', 'create')->name('bidang-dosen.create');
+            Route::post('bidang-dosen/store', 'store')->name('bidang-dosen.store');
+            Route::get('bidang-dosen/edit/{id}', 'edit')->name('bidang-dosen.edit');
+            Route::post('bidang-dosen/update/{id}', 'update')->name('bidang-dosen.update');
+            Route::get('bidang-dosen/destroy/{id}', 'destroy')->name('bidang-dosen.destroy');
         });
         Route::controller(ProdiController::class)->group(function (){
             Route::get('prodi', 'index')->name('prodi');

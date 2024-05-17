@@ -71,12 +71,7 @@
                 <i class="fas fa-fw fa-briefcase"></i>
                 <span>Data Bidang</span></a>
         </li>
-        {{-- Masukkan Ke Kaprodi --}}
-        <li class="nav-item {{Request::is(['data/dospem-mahasiswa', 'data/dospem-mahasiswa/*']) ? 'active' : '' }}">
-            <a class="nav-link" href="{{route('dospem-mahasiswa')}}">
-                <i class="fas fa-fw fa-users"></i>
-                <span>Dospem Mahasiswa</span></a>
-        </li>
+
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
@@ -127,6 +122,14 @@
         </li>
     @endrole
 
+    @role('dosen_kaprodi')
+        <li class="nav-item {{Request::is(['data/dospem-mahasiswa', 'data/dospem-mahasiswa/*']) ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('dospem-mahasiswa')}}">
+                <i class="fas fa-fw fa-users"></i>
+                <span>Dospem Mahasiswa</span></a>
+        </li>
+    @endrole
+
     @hasanyrole(['dosen_pembimbing','dosen_kaprodi'])
         <!-- Heading -->
         {{-- <div class="sidebar-heading">
@@ -134,6 +137,11 @@
         </div> --}}
 
         {{-- Nav Item --}}
+        <li class="nav-item {{Request::is(['data/bidang-dosen', 'data/bidang-dosen/create', 'data/bidang-dosen/edit/*']) ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('bidang-dosen')}}">
+                <i class="fas fa-fw fa-briefcase"></i>
+                <span>Bidang Dosen</span></a>
+        </li>
         <li class="nav-item {{Request::is(['pengajuan-judul', 'pengajuan-judul/*']) ? 'active' : '' }}">
             <a class="nav-link" href="{{route('pengajuan-bimbingan.dosen.index')}}">
                 <i class="fas fa-fw fa-book"></i>
