@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminFakultasController;
 use App\Http\Controllers\AllDosenController;
 use App\Http\Controllers\AngkatanController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BidangController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\DosenPembimbingController;
 use App\Http\Controllers\DosenPembimbingScreenController;
@@ -50,6 +51,14 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('angkatan/edit/{id}', 'edit')->name('angkatan.edit');
             Route::post('angkatan/update/{id}', 'update')->name('angkatan.update');
             Route::get('angkatan/destroy/{id}', 'destroy')->name('angkatan.destroy');
+        });
+        Route::controller(BidangController::class)->group(function (){
+            Route::get('bidang', 'index')->name('bidang');
+            Route::get('bidang/create', 'create')->name('bidang.create');
+            Route::post('bidang/store', 'store')->name('bidang.store');
+            Route::get('bidang/edit/{id}', 'edit')->name('bidang.edit');
+            Route::post('bidang/update/{id}', 'update')->name('bidang.update');
+            Route::get('bidang/destroy/{id}', 'destroy')->name('bidang.destroy');
         });
         Route::controller(ProdiController::class)->group(function (){
             Route::get('prodi', 'index')->name('prodi');

@@ -66,6 +66,12 @@
                 <i class="fas fa-fw fa-users"></i>
                 <span>Data Mahasiswa</span></a>
         </li>
+        <li class="nav-item {{Request::is(['data/bidang', 'data/bidang/create', 'data/bidang/edit/*']) ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('bidang')}}">
+                <i class="fas fa-fw fa-briefcase"></i>
+                <span>Data Bidang</span></a>
+        </li>
+        {{-- Masukkan Ke Kaprodi --}}
         <li class="nav-item {{Request::is(['data/dospem-mahasiswa', 'data/dospem-mahasiswa/*']) ? 'active' : '' }}">
             <a class="nav-link" href="{{route('dospem-mahasiswa')}}">
                 <i class="fas fa-fw fa-users"></i>

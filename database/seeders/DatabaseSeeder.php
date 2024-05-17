@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ProdiSeeder::class,
             AngkatanSeeder::class,
             AdminUnivSeeder::class,
+            BidangSeeder::class,
         ]);
     }
 }
