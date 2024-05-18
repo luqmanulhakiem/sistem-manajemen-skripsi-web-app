@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BidangDosenStoreRequest;
 use App\Models\Bidang;
 use App\Models\BidangDosen;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,8 +16,11 @@ class BidangDosenController extends Controller
      */
     public function index()
     {
+        $user = User::findorfail(auth()->user()->id);
+
         $data = DB::table('bidang_dosens as bd')
         ->leftJoin('bidangs as b', 'b.id', '=', 'bd.id_bidang')
+        ->where('b.id_fakultas', '=', $user->id_fakultas)
         ->select('bd.*', 'b.nama')
         ->paginate(10);
 
@@ -30,7 +34,9 @@ class BidangDosenController extends Controller
      */
     public function create()
     {
-        $bidang = Bidang::get();
+        $user = User::findorfail(auth()->user()->id);
+
+        $bidang = Bidang::where('id_fakultas', $user->id_fakultas)->get();
         return view('pages.bidangDosen.create', compact('bidang'));
     }
 
@@ -67,11 +73,14 @@ class BidangDosenController extends Controller
      */
     public function edit(string $id)
     {
+        $user = User::findorfail(auth()->user()->id);
+
         $all = BidangDosen::where('id_dosen', auth()->user()->id)->get();
         $excludedBidangIds = $all->pluck('id_bidang')->toArray();
         $data = BidangDosen::findorfail($id);
-        // $bidang = Bidang::where('id', '!=', $data->id_bidang)->get(); //get where id != $data->id_bidang && where id != all->id_bidang
-        $bidang = Bidang::whereNotIn('id', $excludedBidangIds)->get();
+        $bidang = Bidang::whereNotIn('id', $excludedBidangIds)
+        ->where('id_fakultas', $user->id_fakultas)
+        ->get();
         return view('pages.bidangDosen.edit', compact('data', 'bidang'));
     }
 

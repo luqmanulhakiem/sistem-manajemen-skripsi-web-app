@@ -22,6 +22,7 @@ class BidangStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
+            "id_fakultas" => "nullable",
             "nama" => "required"
         ];
     }

@@ -14,9 +14,10 @@ class BidangSeeder extends Seeder
     public function run(): void
     {
         $array = [
-            ["nama" => "IOT"],
-            ["nama" => "Sistem Informasi"],
-            ["nama" => "SPK"],
+            ["id_fakultas" => 1,"nama" => "IOT"],
+            ["id_fakultas" => 1,"nama" => "Sistem Informasi"],
+            ["id_fakultas" => 1,"nama" => "SPK"],
+            ["id_fakultas" => 3,"nama" => "Agama"],
         ];
         Bidang::insert($array);
     }

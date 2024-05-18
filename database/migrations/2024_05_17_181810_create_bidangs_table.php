@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('bidangs', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('id_fakultas');
             $table->string('nama');
             $table->timestamps();
         });

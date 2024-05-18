@@ -12,6 +12,12 @@
                         <label for="">Judul Penelitian</label>
                         <input type="text" name="judul" class="form-control" required>
                     </div>
+                    <div class="form-group">
+                        <label for="">Kategori</label>
+                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                        <label for="vehicle1"> I have a bike</label><br>
+                    </div>
+
                     <div class="form-group align-right">
                         <button class="btn btn-primary">Ajukan</button>
                     </div>

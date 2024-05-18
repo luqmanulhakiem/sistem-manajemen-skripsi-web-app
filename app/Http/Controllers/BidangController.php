@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BidangStoreRequest;
 use App\Models\Bidang;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BidangController extends Controller
@@ -13,7 +14,9 @@ class BidangController extends Controller
      */
     public function index()
     {
-        $data = Bidang::paginate(10);
+        $user = User::findorfail(auth()->user()->id);
+
+        $data = Bidang::where('id_fakultas', $user->id_fakultas)->paginate(10);
 
         return view('pages.bidang.index', compact('data'));
     }
@@ -32,9 +35,12 @@ class BidangController extends Controller
     public function store(BidangStoreRequest $request)
     {
         $data = $request->validated();
+        $user = User::findorfail(auth()->user()->id);
+        $data['id_fakultas'] = $user->id_fakultas;
         
         if ($data) {
             Bidang::create([
+                'id_fakultas' => $data['id_fakultas'],
                 'nama' => $data['nama']
             ]);
     

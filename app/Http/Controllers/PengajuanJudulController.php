@@ -16,6 +16,7 @@ class PengajuanJudulController extends Controller
 
     public function create()
     {
+        // $bidang = 
         return view('pages.pengajuanJudul.create');
     }
 

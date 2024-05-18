@@ -9,6 +9,7 @@ class Bidang extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id_fakultas',
         'nama',
     ];
 }
