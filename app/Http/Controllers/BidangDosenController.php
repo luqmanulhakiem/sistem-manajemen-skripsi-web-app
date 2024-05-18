@@ -21,6 +21,7 @@ class BidangDosenController extends Controller
         $data = DB::table('bidang_dosens as bd')
         ->leftJoin('bidangs as b', 'b.id', '=', 'bd.id_bidang')
         ->where('b.id_fakultas', '=', $user->id_fakultas)
+        ->where('bd.id_dosen', '=', $user->id)
         ->select('bd.*', 'b.nama')
         ->paginate(10);
 

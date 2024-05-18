@@ -31,6 +31,14 @@
                                     <td>{{$data->judul}}</td>
                                 </tr>
                                 <tr>
+                                    <td>Bidang :</td>
+                                    <td>
+                                        @foreach ($bidang as $item)
+                                            <span class="badge badge-success">{{$item->nama}}</span>
+                                        @endforeach
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td>Status :</td>
                                     <td><span class="badge bg-warning">{{$data->status}}</span> 
                                         @if ($data->status == 'revisi')

@@ -13,9 +13,11 @@
                         <input type="text" name="judul" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="">Kategori</label>
-                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                        <label for="vehicle1"> I have a bike</label><br>
+                        <label for="">Bidang Judul</label><br>
+                        @foreach ($bidang as $item)
+                            <input type="checkbox" id="bidang_{{ $item->id }}" name="bidang[]" value="{{$item->id}}">
+                            <label for="bidang_{{ $item->id }}">{{$item->nama}}</label><br>
+                        @endforeach
                     </div>
 
                     <div class="form-group align-right">
