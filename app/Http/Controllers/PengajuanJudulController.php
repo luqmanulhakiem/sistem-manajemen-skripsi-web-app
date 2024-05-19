@@ -14,13 +14,16 @@ class PengajuanJudulController extends Controller
     public function index()
     {
         $data = PengajuanJudul::where('id_mahasiswa', auth()->user()->id)->first();
-        $bidang = DB::table('bidang_juduls as bj')
-        ->join('bidangs as b', 'b.id', '=', 'bj.id_bidang')
-        ->where('bj.id_judul', '=', $data->id)
-        ->select('b.nama')
-        ->get();
+        if ($data != null) {
+            $bidang = DB::table('bidang_juduls as bj')
+            ->join('bidangs as b', 'b.id', '=', 'bj.id_bidang')
+            ->where('bj.id_judul', '=', $data->id)
+            ->select('b.nama')
+            ->get();
+            return view('pages.pengajuanJudul.index', compact('data', 'bidang'));
+        }
 
-        return view('pages.pengajuanJudul.index', compact('data', 'bidang'));
+        return view('pages.pengajuanJudul.index', compact('data'));
     }
 
     public function create()

@@ -62,19 +62,24 @@
                             </div>
                             <div class="card-body">
                                 <table class="table">
-                                    <tr>
-                                        <td>Nama : {{$namadosen->name}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Status : <span class="badge bg-warning text-white">{{$dospem->status_dosen1}}</span></td>
-                                        <td></td>
-                                    </tr>
+                                        <tr>
+                                            <td>Nama : {{$namadosen->name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status : <span class="badge bg-warning text-white">{{$dospem->status_dosen1}}</span></td>
+                                            <td></td>
+                                        </tr>
                                     @if ($dospem->status_dosen1 == 'diterima')
-                                    <tr>
-                                        <td>NIDN: {{$namadosen->username}}</td>
-                                    </tr>
+                                        <tr>
+                                            <td>NIDN: {{$namadosen->username}}</td>
+                                        </tr>
                                         <tr>
                                             <td>Telp/WA: XXXXXXXX</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="{{route('bimbingan-mahasiswa.dosen.indexMhs', ['id' => $namadosen->id])}}" class="form-control btn btn-sm btn-primary">Riwayat Bimbingan</a>
+                                            </td>
                                         </tr>
                                     @endif
                                 </table>
@@ -102,6 +107,11 @@
                                         </tr>
                                             <tr>
                                                 <td>Telp/WA: XXXXXXXX</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a href="{{route('bimbingan-mahasiswa.dosen.indexMhs', ['id' => $namadosen2->id])}}" class="form-control btn btn-sm btn-primary">Riwayat Bimbingan</a>
+                                                </td>
                                             </tr>
                                         @endif
                                     </table>

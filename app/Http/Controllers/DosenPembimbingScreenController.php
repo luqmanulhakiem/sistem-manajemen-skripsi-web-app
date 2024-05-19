@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bimbingan;
 use App\Models\PengajuanDospem;
 use App\Models\PengajuanJudul;
 use Illuminate\Http\Request;
@@ -62,20 +63,33 @@ class DosenPembimbingScreenController extends Controller
             $query->where('pd.id_dospem2', '=', auth()->user()->id)
                 ->where('pd.status_dosen2', '=', 'diterima');
         })
-        ->select('pd.*', 'm.name', 'm.username', 'p.name as namaProdi', 'pj.judul', 'pj.status as statusJudul', 'pj.id as idJudul')
+        ->select('pd.*', 'm.name', 'm.username', 'p.name as namaProdi', 'pj.judul', 'pj.status as statusJudul', 'pj.id as idJudul', 'm.id as userId')
         ->paginate(10);
         return view('pages.dosenScreen.BimbinganDiterima.index', compact('data'));
     }
     // ACC JUDUL
     public function bdStore($id, $status) {
-
         $find = PengajuanJudul::where('id', $id)->first();
-        // dd($find, $status);
-
+        
         $dt = [
             'status' => $status
         ];
         $find->update($dt);
+
+        return redirect()->route('daftar-bimbingan.dosen.index');
+    }
+    public function bdStore2($id, $status, $idMhs) {
+        $find = PengajuanJudul::where('id', $id)->first();
+        
+        $dt = [
+            'status' => $status
+        ];
+        $find->update($dt);
+
+        Bimbingan::create([
+            'id_mahasiswa' => $idMhs,
+            'id_dosen' => auth()->user()->id,
+        ]);
         return redirect()->route('daftar-bimbingan.dosen.index');
     }
     // Revisi Judul

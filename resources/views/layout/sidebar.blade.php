@@ -129,6 +129,13 @@
                 <span>Dospem Mahasiswa</span></a>
         </li>
     @endrole
+    @hasanyrole(['admn_fakultas','mahasiswa'])
+        <li class="nav-item {{Request::is(['data/jadwal', 'data/jadwal/*']) ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('jadwal')}}">
+                <i class="fas fa-fw fa-calendar"></i>
+                <span>Jadwal</span></a>
+        </li>
+    @endhasanyrole
 
     @hasanyrole(['dosen_pembimbing','dosen_kaprodi'])
         <!-- Heading -->

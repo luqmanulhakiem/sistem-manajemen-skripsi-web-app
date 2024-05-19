@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
 
-    <h1 class="h3 mb-2 text-gray-800">Data Mahasiswa Yang Mengajukan Bimbingan</h1>
+    <h1 class="h3 mb-2 text-gray-800">Daftar Bimbingan</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -17,7 +17,7 @@
                             <th>Nama Mahasiswa</th>
                             <th>Prodi</th>
                             <th>Judul Penelitian</th>
-                            <th class="text-center">Aksi Judul</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,13 +33,16 @@
                                     <td>{{$item->namaProdi}}</td>
                                     <td>{{$item->judul}}</td>
                                     @if ($item->statusJudul == "diterima")
-                                        <td class="text-center"><span class="badge badge-success">{{$item->statusJudul}}</span></td>
+                                        <td class="text-center">
+                                            {{-- <span class="badge badge-success">{{$item->statusJudul}}</span> --}}
+                                            <a href="{{route('bimbingan-mahasiswa.dosen.index', ["id" => $item->userId])}}" class="btn btn-sm btn-primary">Bimbingan</a>
+                                        </td>
                                     @else
                                         @if ($item->statusJudul == "diajukan")
                                             <td class="text-center">
                                                 <div class="btn-group">
-                                                    <a href="{{route('daftar-bimbingan.dosen.store', ["id" => $item->idJudul, "status" => "diterima"])}}" class="btn btn-sm btn-success">Terima</a>
-                                                    <a href="{{route('daftar-bimbingan.dosen.edit', ["id" => $item->idJudul])}}" class="btn btn-sm btn-warning">Revisi</a>
+                                                    <a href="{{route('daftar-bimbingan.dosen.store2', ["id" => $item->idJudul, "status" => "diterima", "idMhs" => $item->userId])}}" class="btn btn-sm btn-success">Terima Judul</a>
+                                                    <a href="{{route('daftar-bimbingan.dosen.edit', ["id" => $item->idJudul])}}" class="btn btn-sm btn-warning">Revisi Judul</a>
                                                 </div>
                                             </td>
                                         @else

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bimbingan;
 use App\Models\PengajuanDospem;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -58,6 +59,11 @@ class DospemMahasiswaController extends Controller
             'id_dospem2' => $id_dosen2,
             'status_dosen2' => 'diterima'
         ];
+
+        Bimbingan::create([
+            'id_mahasiswa' => $find->id_mahasiswa,
+            'id_dosen' => $id_dosen2,
+        ]);
         $find->update($dt);
         return redirect()->route('dospem-mahasiswa');
     }

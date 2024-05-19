@@ -37,7 +37,13 @@ class BidangDosenController extends Controller
     {
         $user = User::findorfail(auth()->user()->id);
 
-        $bidang = Bidang::where('id_fakultas', $user->id_fakultas)->get();
+        $all = BidangDosen::where('id_dosen', auth()->user()->id)->get();
+        $excludedBidangIds = $all->pluck('id_bidang')->toArray();
+        $bidang = Bidang::whereNotIn('id', $excludedBidangIds)
+        ->where('id_fakultas', $user->id_fakultas)
+        ->get();
+
+        // $bidang = Bidang::where('id_fakultas', $user->id_fakultas)->get();
         return view('pages.bidangDosen.create', compact('bidang'));
     }
 
